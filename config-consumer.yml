@@ -1,31 +1,33 @@
 spring:
-
  profiles:
-
    active:
-
      - dev
-
 ---
-
 server:
-
   port: 80
-
+spring:
+  profiles: dev
 eureka:
-
   client:
-
     service-url:
-
       defaultZone: http://localhost:7001/eureka
-
     register-with-eureka: false
-
 #    不注册服务
-
 feign:
-
   hystrix:
-
+    enabled: true   #开启feign的hystrix支持，默认false
+ 
+---
+server:
+  port: 80
+spring:
+  profiles: test
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+    register-with-eureka: false
+#    不注册服务
+feign:
+  hystrix:
     enabled: true   #开启feign的hystrix支持，默认false
