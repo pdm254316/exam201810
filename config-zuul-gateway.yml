@@ -1,0 +1,45 @@
+
+spring:
+ profiles:
+   active:
+     - dev
+---
+server:
+  port: 4321
+spring:
+  profiles: dev
+spring:
+  application:
+    name: zuul-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+zuul:
+  routes:
+    mydept.serviceId: provider-contact
+    mydept.path: /test/**
+  ignored-services: "*"  #   provider-contact
+  prefix: /py
+
+#  http://localhost:4321/provider-contact/findContent?name=&page=1&size=3
+---
+server:
+  port: 4321
+spring:
+  profiles: test
+spring:
+  application:
+    name: zuul-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+zuul:
+  routes:
+    mydept.serviceId: provider-contact
+    mydept.path: /test/**
+  ignored-services: "*"  #   provider-contact
+  prefix: /py
+
+#  http://localhost:4321/provider-contact/findContent?name=&page=1&size=3
